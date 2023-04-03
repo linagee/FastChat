@@ -1,0 +1,28 @@
+FROM python:3.11-bullseye
+
+# Update package index and install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        curl \
+        pkg-config \
+        libssl-dev \
+        cmake && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY ../ /app
+WORKDIR /app
+
+# Install rustup and the latest stable Rust version
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Add Rust's Cargo to the PATH
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Remove the .git folder
+RUN rm -rf .git
+
+RUN pip install --upgrade pip --verbose \
+    && pip install -e . --verbose \
+    && pip install tokenizers sentencepiece --verbose \
+    && pip install git+https://github.com/huggingface/transformers --verbose

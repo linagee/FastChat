@@ -238,13 +238,13 @@ async def get_status(request: Request):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", type=str, default="localhost")
+    parser.add_argument("--host", type=str, default="modelworker")
     parser.add_argument("--port", type=int, default=21002)
     parser.add_argument("--worker-address", type=str,
-        default="http://localhost:21002")
+        default="http://modelworker:21002")
     parser.add_argument("--controller-address", type=str,
-        default="http://localhost:21001")
-    parser.add_argument("--model-path", type=str, default="facebook/opt-350m")
+        default="http://controller:21001")
+    parser.add_argument("--model-path", type=str, default="facebook/opt-1.3b")
     parser.add_argument("--model-name", type=str)
     parser.add_argument("--num-gpus", type=int, default=1)
     parser.add_argument("--limit-model-concurrency", type=int, default=5)

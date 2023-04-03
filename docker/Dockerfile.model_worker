@@ -1,0 +1,9 @@
+FROM base
+
+#ENV MODEL_PATH facebook/opt-1.3b
+#
+#CMD ["python3", "-m", "fastchat.serve.model_worker", "--model-path", "${MODEL_PATH}"]
+
+
+CMD ["python3", "-m", "fastchat.serve.model_worker"]
+
